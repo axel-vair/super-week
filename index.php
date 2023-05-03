@@ -9,12 +9,12 @@ $router->setBasePath('/super-week');
 
 $router->map('GET', '/', function () {
     echo '<h1>Welcome on my index</h1>';
-    $UserController = new UserController();
-    $UserController->list();
 });
 
 $router->map('GET', '/users', function () {
     echo '<h1>Welcome to me users list</h1>';
+    $UserController = new UserController();
+    $UserController->list();
 });
 
 $router->map('GET', '/users/[i:id]', function ($id) {
