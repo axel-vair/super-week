@@ -25,6 +25,10 @@ $router->map('GET', '/register', function(){
     require_once 'src/View/register.php';
 });
 
+$router->map('POST', '/register', function (){
+    $AuthController = new AuthController();
+    $AuthController->register();
+});
 
 $match = $router->match();
 
