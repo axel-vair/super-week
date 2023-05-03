@@ -19,7 +19,10 @@ $router->map('GET', '/users', function () {
 
 $router->map('GET', '/users/[i:id]', function ($id) {
     echo '<h1>Welcome sur la page de l\'utilisateur ' . $id . '</h1>';
+});
 
+$router->map('GET', '/register', function(){
+    echo '<h1>Mon formulaire d\'inscription !</h1>';
 });
 
 
