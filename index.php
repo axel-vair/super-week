@@ -22,7 +22,7 @@ $router->map('GET', '/users/[i:id]', function ($id) {
 });
 
 $router->map('GET', '/register', function(){
-    echo '<h1>Mon formulaire d\'inscription !</h1>';
+    require_once 'src/View/register.php';
 });
 
 
