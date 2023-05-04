@@ -38,6 +38,20 @@ $router->map('POST', '/register', function (){
     echo json_encode($response);
 });
 
+$router->map('GET', '/login', function(){
+    require_once 'src/View/login.php';
+});
+
+
+$router->map('POST', '/login', function (){
+    $AuthController = new AuthController();
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $response = $AuthController->connectionUser($email, $password);
+    echo json_encode($response);
+});
+
 $match = $router->match();
 
 if (is_array($match) && is_callable($match['target'])) {

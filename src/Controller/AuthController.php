@@ -14,4 +14,9 @@ class AuthController
         $success = $this->user->insertUser($email, $firstname, $lastname, $password);
         return ['success' => $success];
     }
+
+    public function connectionUser($email, $password){
+        $success = $this->user->connection($email, $password);
+        return ['success' => $success];
+    }
 }

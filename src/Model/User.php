@@ -64,4 +64,27 @@ class User extends Database
             return false;
         }
     }
+
+    public function connection($email, $password){
+        $sql = 'SELECT * 
+                FROM user
+                WHERE email = :email ';
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([
+            'email' => $email,
+        ]);
+        $results = $sql_exe->fetch(PDO::FETCH_ASSOC);
+        if ($results) {
+            $hashed_password = $results['password'];
+            if (password_verify($password, $hashed_password)) {
+                $userId = $results['id'];
+                $_SESSION['id'] = $userId;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
