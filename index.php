@@ -2,6 +2,7 @@
 require_once 'vendor/autoload.php';
 
 use App\Controller\UserController;
+use App\Controller\AuthController;
 use App\Model\User;
 
 $router = new AltoRouter();
@@ -19,9 +20,23 @@ $router->map('GET', '/users', function () {
 
 $router->map('GET', '/users/[i:id]', function ($id) {
     echo '<h1>Welcome sur la page de l\'utilisateur ' . $id . '</h1>';
-
 });
 
+$router->map('GET', '/register', function(){
+    require_once 'src/View/register.php';
+});
+
+$router->map('POST', '/register', function (){
+    $AuthController = new AuthController();
+
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $response = $AuthController->register($email, $firstname, $lastname, $password);
+    echo json_encode($response);
+});
 
 $match = $router->match();
 

@@ -51,10 +51,8 @@ class Database
             $pdo = new pdo($db_dsn, $this->db_username, $this->db_password, $db_options);
             $this->pdo = $pdo;
             $this->db = $pdo;
-            echo "Connected to the database";
         } catch (PDOException $e) {
             // update the connection errors
-
             die($e->getMessage());
 
         }
