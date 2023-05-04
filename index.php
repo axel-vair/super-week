@@ -22,6 +22,27 @@ $router->map('GET', '/users/[i:id]', function ($id) {
     echo '<h1>Welcome sur la page de l\'utilisateur ' . $id . '</h1>';
 });
 
+$router->map('GET', '/books/write', function () {
+    echo "mon formulaire";
+});
+
+$router->map('POST', '/books/write', function () {
+    echo "ajoute un nouveau livre en bdd avec comme auteur l'utilisateur actuellement connecté";
+});
+
+$router->map('GET', '/books', function (){
+   echo "récupère les infos de tous les livres et les affiche au format JSOn";
+});
+
+$router->map('GET', '/books/[i:id]', function (){
+    echo 'récupère les infos du livre avec lid précisé en paramètre et affiche au format json';
+});
+
+$router->map('GET', '/logout', function (){
+    echo "déconnection";
+});
+
+
 $router->map('GET', '/register', function(){
     require_once 'src/View/register.php';
 });
@@ -42,7 +63,6 @@ $router->map('GET', '/login', function(){
     require_once 'src/View/login.php';
 });
 
-
 $router->map('POST', '/login', function (){
     $AuthController = new AuthController();
     $email = $_POST['email'];
@@ -51,6 +71,7 @@ $router->map('POST', '/login', function (){
     $response = $AuthController->connectionUser($email, $password);
     echo json_encode($response);
 });
+
 
 $match = $router->match();
 
