@@ -45,8 +45,10 @@ $router->map('GET', '/books', function (){
     require_once 'src/view/display_book.php';
 });
 
-$router->map('GET', '/books/[i:id]', function (){
-    echo 'récupère les infos du livre avec lid précisé en paramètre et affiche au format json';
+$router->map('GET', '/books/[i:id]', function ($id){
+    $BookController = new BookController();
+    $response = $BookController->getBookById($id);
+    echo json_encode($response);
 });
 
 $router->map('GET', '/logout', function (){

@@ -33,6 +33,13 @@ class Book extends Database
         $sql_exe->execute([]);
         $result = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
 
+    public function displayBookById($id){
+        $sql = "SELECT * FROM book WHERE id = $id";
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([]);
+        $result = $sql_exe->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

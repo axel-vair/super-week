@@ -19,4 +19,8 @@ class BookController
     public function getBooks(){
        return $this->book->displayBooks();
     }
+
+    public function getBookById($id){
+        return $this->book->displayBookById($id);
+    }
 }
