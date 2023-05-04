@@ -39,7 +39,10 @@ $router->map('POST', '/books/write', function () {
 });
 
 $router->map('GET', '/books', function (){
-   echo "récupère les infos de tous les livres et les affiche au format JSOn";
+    $BookController = new BookController();
+    $response = $BookController->getBooks();
+    echo json_encode($response);
+    require_once 'src/view/display_book.php';
 });
 
 $router->map('GET', '/books/[i:id]', function (){

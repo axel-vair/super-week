@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Model;
-
+use PDO;
+use PDOException;
 class Book extends Database
 {
     public function __construct()
@@ -24,5 +25,14 @@ class Book extends Database
         } else {
             return false;
         }
+    }
+
+    public function displayBooks(){
+        $sql = "SELECT * FROM book";
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([]);
+        $result = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
     }
 }

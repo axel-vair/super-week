@@ -12,8 +12,11 @@ class BookController
         $this->user = new User();
         $this->book = new Book();
     }
-
     public function insertBook($title, $content, $id_user){
         $this->book->addBook($title, $content, $id_user);
+    }
+
+    public function getBooks(){
+       return $this->book->displayBooks();
     }
 }
