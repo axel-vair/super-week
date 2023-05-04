@@ -1,8 +1,9 @@
 <?php
 require_once 'vendor/autoload.php';
-
+session_start();
 use App\Controller\UserController;
 use App\Controller\AuthController;
+use App\Controller\BookController;
 use App\Model\User;
 
 $router = new AltoRouter();
@@ -18,16 +19,23 @@ $router->map('GET', '/users', function () {
     $UserController->list();
 });
 
-$router->map('GET', '/users/[i:id]', function ($id) {
+$router->map('GET', '/user/[i:id]', function ($id) {
     echo '<h1>Welcome sur la page de l\'utilisateur ' . $id . '</h1>';
+    $UserController = new UserController();
+    $UserController->getUserById($id);
 });
 
 $router->map('GET', '/books/write', function () {
-    echo "mon formulaire";
+    require_once 'src/View/add_book.php';
 });
 
 $router->map('POST', '/books/write', function () {
     echo "ajoute un nouveau livre en bdd avec comme auteur l'utilisateur actuellement connecté";
+    $BookController = new BookController();
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $id_user = $_SESSION['id'];
+    $BookController->insertBook($title, $content, $id_user);
 });
 
 $router->map('GET', '/books', function (){
