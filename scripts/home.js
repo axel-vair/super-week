@@ -1,7 +1,9 @@
 let btnUsers = document.getElementById('users');
 let btnBooks = document.getElementById('books');
+let btnBook = document.getElementById('book');
+let btnUser = document.getElementById('user');
 
-async function getUsers(){
+async function getUsers() {
     let response = await fetch(`users`);
     let responseData = await response.json();
 
@@ -9,7 +11,7 @@ async function getUsers(){
     let divUsers = document.querySelector('#displayUsers');
     divUsers.innerHTML = "";
 
-    for(let i = 0; i < responseData.length; i++){
+    for (let i = 0; i < responseData.length; i++) {
         let template = `
     <li>
         <strong>Prénom</strong> :  ${responseData[i].first_name}
@@ -17,22 +19,23 @@ async function getUsers(){
         <strong>Email</strong> : ${responseData[i].email}
     </li>
     `
-    divUsers.insertAdjacentHTML('beforeend', template);
+        divUsers.insertAdjacentHTML('beforeend', template);
     }
 }
+
 btnUsers.addEventListener('click', (ev) => {
     ev.preventDefault();
     getUsers();
 })
 
-async function getBooks(){
+async function getBooks() {
     let response = await fetch(`books`);
     let responseData = await response.json();
 
     let divBooks = document.querySelector('#displayBooks');
     divBooks.innerHTML = "";
 
-    for(let i = 0; i < responseData.length; i++){
+    for (let i = 0; i < responseData.length; i++) {
         let template = `
     <li>
         <strong>Titre</strong> : ${responseData[i].title}
@@ -42,7 +45,55 @@ async function getBooks(){
         divBooks.insertAdjacentHTML('beforeend', template);
     }
 }
+
 btnBooks.addEventListener('click', (ev) => {
-    ev.preventDefault()
+    ev.preventDefault();
     getBooks();
+})
+
+
+async function getBook(idBook) {
+    let response = await fetch(`books/${idBook}`);
+    let responseData = await response.json();
+
+    let divOneBook = document.querySelector('#displayOneBook');
+    divOneBook.innerHTML = "";
+
+    let template = `
+    <li>
+        <strong>Titre</strong> : ${responseData.title}
+        <strong>Contenu</strong> : ${responseData.content}
+    </li>
+    `
+    divOneBook.insertAdjacentHTML('beforeend', template)
+
+}
+
+btnBook.addEventListener('submit', (ev) => {
+    ev.preventDefault()
+    let idBook = ev.target[0].value;
+    getBook(idBook);
+})
+
+async function getUser(idUser){
+    let response = await fetch(`user/${idUser}`);
+    let responseData = await response.json();
+
+    let divOneUser = document.querySelector('#displayOneUser');
+    divOneUser.innerHTML = "";
+
+    let template = `
+    <li>
+        <strong>Prénom</strong> : ${responseData[0].first_name}
+        <strong>Nom</strong> : ${responseData[0].last_name}
+        <strong>Email</strong> : ${responseData[0].email}
+    </li>
+    `
+    divOneUser.insertAdjacentHTML('beforeend', template)
+
+}
+btnUser.addEventListener('submit', (ev) => {
+    ev.preventDefault()
+    let idUser = ev.target[0].value;
+    getUser(idUser);
 })

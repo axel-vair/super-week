@@ -21,6 +21,6 @@ class BookController
     }
 
     public function getBookById($id){
-        return $this->book->displayBookById($id);
+        echo json_encode($this->book->displayBookById($id));
     }
 }

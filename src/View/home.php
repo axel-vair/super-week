@@ -14,19 +14,24 @@
 <body>
 <button id="users">Utilisateurs</button>
 <div id="displayUsers"></div>
+
 <button id="books">Livres</button>
 <div id='displayBooks'></div>
+
 <form id="user">
     <label>Id de l'utilisateur</label>
     <input name="user" type="text">
-    <button id='submit'>Chercher l'utilisateur</button>
+    <button type="submit" id='user'>Chercher l'utilisateur</button>
 </form>
+<div id="displayOneUser"></div>
+
 
 <form id='book'>
     <label>Id du livre</label>
     <input name="book" type="text">
-    <button id='submit'>Chercher le livre</button>
+    <button type="submit" id='book'>Chercher le livre</button>
 </form>
+<div id='displayOneBook'></div>
 
 
 </body>

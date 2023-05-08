@@ -19,7 +19,6 @@ $router->map('GET', '/users', function () {
 });
 
 $router->map('GET', '/user/[i:id]', function ($id) {
-    echo '<h1>Welcome sur la page de l\'utilisateur ' . $id . '</h1>';
     $UserController = new UserController();
     $UserController->getUserById($id);
 });
@@ -44,14 +43,13 @@ $router->map('GET', '/books', function (){
 
 $router->map('GET', '/books/[i:id]', function ($id){
     $BookController = new BookController();
-    $response = $BookController->getBookById($id);
-    echo json_encode($response);
+    $BookController->getBookById($id);
+
 });
 
 $router->map('GET', '/logout', function (){
     $AuthController = new AuthController();
     $response = $AuthController->logout();
-
     require_once 'src/View/logout.php';
 });
 
