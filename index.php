@@ -10,7 +10,7 @@ $router = new AltoRouter();
 $router->setBasePath('/super-week');
 
 $router->map('GET', '/', function () {
-    echo '<h1>Welcome on my index</h1>';
+    require_once 'src/View/home.php';
 });
 
 $router->map('GET', '/users', function () {
