@@ -10,6 +10,7 @@ async function handleFormSubmit(event) {
     if (responseData.success) {
         let errorDiv = document.querySelector('.error');
         errorDiv.innerHTML = "Inscription réussie"
+        window.location.replace('login');
     } else {
         let errorDiv = document.querySelector('.error');
         errorDiv.innerHTML = "L'inscription a échoué"

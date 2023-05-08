@@ -52,7 +52,10 @@ $router->map('GET', '/books/[i:id]', function ($id){
 });
 
 $router->map('GET', '/logout', function (){
-    echo "déconnection";
+    $AuthController = new AuthController();
+    $response = $AuthController->logout();
+
+    require_once 'src/View/logout.php';
 });
 
 

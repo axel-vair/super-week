@@ -84,7 +84,6 @@ class User extends Database
         if ($results) {
             $hashed_password = $results['password'];
             if (password_verify($password, $hashed_password)) {
-                session_start();
                 $userId = $results['id'];
                 $_SESSION['id'] = $userId;
                 return true;
@@ -94,5 +93,9 @@ class User extends Database
         } else {
             return false;
         }
+    }
+
+    public function logout(){
+        session_destroy();
     }
 }

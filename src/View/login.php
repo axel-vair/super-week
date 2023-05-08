@@ -12,6 +12,7 @@
 </head>
 <body>
 <h1>Mon formulaire de connexion</h1>
+
 <div class="error"></div>
 <form id="connectionForm" method="POST">
     <label for='email'>email</label>

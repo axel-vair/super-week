@@ -19,4 +19,9 @@ class AuthController
         $success = $this->user->connection($email, $password);
         return ['success' => $success];
     }
+
+    public function logout(){
+        $success = $this->user->logout();
+        return $success;
+    }
 }
