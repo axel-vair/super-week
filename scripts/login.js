@@ -1,20 +1,21 @@
-let registerForm = document.getElementById('registerForm');
+let connectionForm = document.getElementById('connectionForm');
 
 async function handleFormSubmit(event) {
     event.preventDefault();
     let form = new FormData(event.currentTarget);
-    let url = "register";
+    let url = "login";
     let request = new Request(url, {method: 'POST', body: form});
     let response = await fetch(request);
     let responseData = await response.json();
+
     if (responseData.success) {
         let errorDiv = document.querySelector('.error');
-        errorDiv.innerHTML = "Inscription réussie"
-        window.location.replace('login');
+        errorDiv.innerHTML = "Connexion réussie";
+        window.location.replace('users')
     } else {
         let errorDiv = document.querySelector('.error');
-        errorDiv.innerHTML = "L'inscription a échoué"
+        errorDiv.innerHTML = "La connexion a échoué";
     }
 }
 
-registerForm.addEventListener('submit', (event) => handleFormSubmit(event));
+connectionForm.addEventListener('submit', (event) => handleFormSubmit(event));

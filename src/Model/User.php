@@ -7,13 +7,13 @@ use App\Model\Database;
 use PDO;
 use PDOException;
 
-
 class User extends Database
 {
     public ?string $last_name;
     public ?string $first_name;
     public ?string $email;
 
+    public ?int $id;
 
     public function __construct()
     {
@@ -29,6 +29,13 @@ class User extends Database
         return $result;
     }
 
+    public function userById($id){
+        $sql = "SELECT * FROM user WHERE id = $id";
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([]);
+        $result = $sql_exe->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function verifUser($email)
     {
         $sql = "SELECT * FROM user WHERE email = :email";
@@ -63,5 +70,32 @@ class User extends Database
         } else {
             return false;
         }
+    }
+
+    public function connection($email, $password){
+        $sql = 'SELECT * 
+                FROM user
+                WHERE email = :email ';
+        $sql_exe = $this->db->prepare($sql);
+        $sql_exe->execute([
+            'email' => $email,
+        ]);
+        $results = $sql_exe->fetch(PDO::FETCH_ASSOC);
+        if ($results) {
+            $hashed_password = $results['password'];
+            if (password_verify($password, $hashed_password)) {
+                $userId = $results['id'];
+                $_SESSION['id'] = $userId;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function logout(){
+        session_destroy();
     }
 }

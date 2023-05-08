@@ -15,4 +15,8 @@ class UserController
       echo json_encode($this->user->findAll());
     }
 
+    public function getUserById($id){
+        echo json_encode($this->user->userById($id));
+    }
+
 }
