@@ -14,7 +14,6 @@ $router->map('GET', '/', function () {
 });
 
 $router->map('GET', '/users', function () {
-    echo '<h1>Welcome to me users list</h1>';
     $UserController = new UserController();
     $UserController->list();
 });
@@ -40,9 +39,7 @@ $router->map('POST', '/books/write', function () {
 
 $router->map('GET', '/books', function (){
     $BookController = new BookController();
-    $response = $BookController->getBooks();
-    echo json_encode($response);
-    require_once 'src/view/display_book.php';
+    $BookController->getBooks();
 });
 
 $router->map('GET', '/books/[i:id]', function ($id){

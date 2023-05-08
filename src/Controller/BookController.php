@@ -17,7 +17,7 @@ class BookController
     }
 
     public function getBooks(){
-       return $this->book->displayBooks();
+       echo  json_encode($this->book->displayBooks());
     }
 
     public function getBookById($id){
